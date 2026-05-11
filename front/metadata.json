@@ -1,0 +1,6 @@
+{
+  "name": "新闻资讯管理系统",
+  "description": "基于 Vue 3 + Element Plus 的新闻资讯发布与管理系统",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

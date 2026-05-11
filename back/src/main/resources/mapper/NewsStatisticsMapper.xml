@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.NewsStatisticsMapper">
+
+    <resultMap type="com.example.domain.NewsStatistics" id="NewsStatisticsResult">
+        <result property="id"    column="id"    />
+        <result property="newsId"    column="news_id"    />
+        <result property="readCount"    column="read_count"    />
+        <result property="likeCount"    column="like_count"    />
+        <result property="commentCount"    column="comment_count"    />
+        <result property="syncVersion"    column="sync_version"    />
+        <result property="syncTime"    column="sync_time"    />
+        <result property="isDeleted"    column="is_deleted"    />
+        <result property="createdAt"    column="created_at"    />
+        <result property="updatedAt"    column="updated_at"    />
+    </resultMap>
+
+    <sql id="selectNewsStatisticsVo">
+        select id, news_id, read_count, like_count, comment_count, sync_version, sync_time, is_deleted, created_at, updated_at from t_news_statistics
+    </sql>
+
+    <select id="selectNewsStatisticsList" parameterType="com.example.domain.NewsStatistics" resultMap="NewsStatisticsResult">
+        <include refid="selectNewsStatisticsVo"/>
+        <where>
+            <if test="newsId != null "> and news_id = #{newsId}</if>
+            <if test="readCount != null "> and read_count &gt;= #{readCount}</if>
+            <if test="likeCount != null "> and like_count &gt;= #{likeCount}</if>
+            <if test="commentCount != null "> and comment_count &gt;= #{commentCount}</if>
+            <if test="params.beginCreatedAt != null and params.beginCreatedAt != '' and params.endCreatedAt != null and params.endCreatedAt != ''"> and created_at between #{params.beginCreatedAt} and #{params.endCreatedAt}</if>
+        </where>
+    </select>
+
+    <select id="selectNewsStatisticsById" parameterType="Long" resultMap="NewsStatisticsResult">
+        <include refid="selectNewsStatisticsVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertNewsStatistics" parameterType="com.example.domain.NewsStatistics" useGeneratedKeys="true" keyProperty="id">
+        insert into t_news_statistics
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="newsId != null">news_id,</if>
+            <if test="readCount != null">read_count,</if>
+            <if test="likeCount != null">like_count,</if>
+            <if test="commentCount != null">comment_count,</if>
+            <if test="syncVersion != null">sync_version,</if>
+            <if test="syncTime != null">sync_time,</if>
+            <if test="isDeleted != null">is_deleted,</if>
+            <if test="createdAt != null">created_at,</if>
+            <if test="updatedAt != null">updated_at,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="newsId != null">#{newsId},</if>
+            <if test="readCount != null">#{readCount},</if>
+            <if test="likeCount != null">#{likeCount},</if>
+            <if test="commentCount != null">#{commentCount},</if>
+            <if test="syncVersion != null">#{syncVersion},</if>
+            <if test="syncTime != null">#{syncTime},</if>
+            <if test="isDeleted != null">#{isDeleted},</if>
+            <if test="createdAt != null">#{createdAt},</if>
+            <if test="updatedAt != null">#{updatedAt},</if>
+        </trim>
+    </insert>
+
+    <update id="updateNewsStatistics" parameterType="com.example.domain.NewsStatistics">
+        update t_news_statistics
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="newsId != null">news_id = #{newsId},</if>
+            <if test="readCount != null">read_count = #{readCount},</if>
+            <if test="likeCount != null">like_count = #{likeCount},</if>
+            <if test="commentCount != null">comment_count = #{commentCount},</if>
+            <if test="syncVersion != null">sync_version = #{syncVersion},</if>
+            <if test="syncTime != null">sync_time = #{syncTime},</if>
+            <if test="isDeleted != null">is_deleted = #{isDeleted},</if>
+            <if test="createdAt != null">created_at = #{createdAt},</if>
+            <if test="updatedAt != null">updated_at = #{updatedAt},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteNewsStatisticsById" parameterType="Long">
+        delete from t_news_statistics where id = #{id}
+    </delete>
+
+    <delete id="deleteNewsStatisticsByIds" parameterType="String">
+        delete from t_news_statistics where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

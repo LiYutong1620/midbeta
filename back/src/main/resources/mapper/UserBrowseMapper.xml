@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.UserBrowseMapper">
+
+    <resultMap type="com.example.domain.UserBrowse" id="UserBrowseResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="newsId"    column="news_id"    />
+        <result property="browseTime"    column="browse_time"    />
+        <result property="browseDuration"    column="browse_duration"    />
+        <result property="isDeleted"    column="is_deleted"    />
+    </resultMap>
+
+    <sql id="selectUserBrowseVo">
+        select id, user_id, news_id, browse_time, browse_duration, is_deleted from t_user_browse
+    </sql>
+
+    <select id="selectUserBrowseList" parameterType="com.example.domain.UserBrowse" resultMap="UserBrowseResult">
+        <include refid="selectUserBrowseVo"/>
+        <where>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="newsId != null "> and news_id = #{newsId}</if>
+            <if test="params.beginBrowseTime != null and params.beginBrowseTime != '' and params.endBrowseTime != null and params.endBrowseTime != ''"> and browse_time between #{params.beginBrowseTime} and #{params.endBrowseTime}</if>
+        </where>
+    </select>
+
+    <select id="selectUserBrowseById" parameterType="Long" resultMap="UserBrowseResult">
+        <include refid="selectUserBrowseVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertUserBrowse" parameterType="com.example.domain.UserBrowse" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user_browse
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="newsId != null">news_id,</if>
+            <if test="browseTime != null">browse_time,</if>
+            <if test="browseDuration != null">browse_duration,</if>
+            <if test="isDeleted != null">is_deleted,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="newsId != null">#{newsId},</if>
+            <if test="browseTime != null">#{browseTime},</if>
+            <if test="browseDuration != null">#{browseDuration},</if>
+            <if test="isDeleted != null">#{isDeleted},</if>
+        </trim>
+    </insert>
+
+    <update id="updateUserBrowse" parameterType="com.example.domain.UserBrowse">
+        update t_user_browse
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="newsId != null">news_id = #{newsId},</if>
+            <if test="browseTime != null">browse_time = #{browseTime},</if>
+            <if test="browseDuration != null">browse_duration = #{browseDuration},</if>
+            <if test="isDeleted != null">is_deleted = #{isDeleted},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserBrowseById" parameterType="Long">
+        delete from t_user_browse where id = #{id}
+    </delete>
+
+    <delete id="deleteUserBrowseByIds" parameterType="String">
+        delete from t_user_browse where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.NewsLikeMapper">
+
+    <resultMap type="com.example.domain.NewsLike" id="NewsLikeResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="newsId"    column="news_id"    />
+        <result property="likeStatus"    column="like_status"    />
+        <result property="isDeleted"    column="is_deleted"    />
+        <result property="createdAt"    column="created_at"    />
+        <result property="updatedAt"    column="updated_at"    />
+    </resultMap>
+
+    <sql id="selectNewsLikeVo">
+        select id, user_id, news_id, like_status, is_deleted, created_at, updated_at from t_news_like
+    </sql>
+
+    <select id="selectNewsLikeList" parameterType="com.example.domain.NewsLike" resultMap="NewsLikeResult">
+        <include refid="selectNewsLikeVo"/>
+        <where>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="newsId != null "> and news_id = #{newsId}</if>
+            <if test="likeStatus != null "> and like_status = #{likeStatus}</if>
+            <if test="params.beginCreatedAt != null and params.beginCreatedAt != '' and params.endCreatedAt != null and params.endCreatedAt != ''"> and created_at between #{params.beginCreatedAt} and #{params.endCreatedAt}</if>
+        </where>
+    </select>
+
+    <select id="selectNewsLikeById" parameterType="Long" resultMap="NewsLikeResult">
+        <include refid="selectNewsLikeVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertNewsLike" parameterType="com.example.domain.NewsLike" useGeneratedKeys="true" keyProperty="id">
+        insert into t_news_like
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="newsId != null">news_id,</if>
+            <if test="likeStatus != null">like_status,</if>
+            <if test="isDeleted != null">is_deleted,</if>
+            <if test="createdAt != null">created_at,</if>
+            <if test="updatedAt != null">updated_at,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="newsId != null">#{newsId},</if>
+            <if test="likeStatus != null">#{likeStatus},</if>
+            <if test="isDeleted != null">#{isDeleted},</if>
+            <if test="createdAt != null">#{createdAt},</if>
+            <if test="updatedAt != null">#{updatedAt},</if>
+        </trim>
+    </insert>
+
+    <update id="updateNewsLike" parameterType="com.example.domain.NewsLike">
+        update t_news_like
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="newsId != null">news_id = #{newsId},</if>
+            <if test="likeStatus != null">like_status = #{likeStatus},</if>
+            <if test="isDeleted != null">is_deleted = #{isDeleted},</if>
+            <if test="createdAt != null">created_at = #{createdAt},</if>
+            <if test="updatedAt != null">updated_at = #{updatedAt},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteNewsLikeById" parameterType="Long">
+        delete from t_news_like where id = #{id}
+    </delete>
+
+    <delete id="deleteNewsLikeByIds" parameterType="String">
+        delete from t_news_like where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

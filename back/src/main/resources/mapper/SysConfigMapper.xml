@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.SysConfigMapper">
+
+    <resultMap type="SysConfig" id="SysConfigResult">
+        <result property="id"    column="id"    />
+        <result property="configKey"    column="config_key"    />
+        <result property="configValue"    column="config_value"    />
+        <result property="configType"    column="config_type"    />
+        <result property="remark"    column="remark"    />
+        <result property="isDeleted"    column="is_deleted"    />
+        <result property="createdAt"    column="created_at"    />
+        <result property="updatedAt"    column="updated_at"    />
+    </resultMap>
+
+    <sql id="selectSysConfigVo">
+        select id, config_key, config_value, config_type, remark, is_deleted, created_at, updated_at from t_sys_config
+    </sql>
+
+    <select id="selectSysConfigList" parameterType="SysConfig" resultMap="SysConfigResult">
+        <include refid="selectSysConfigVo"/>
+        <where>
+            <if test="configKey != null  and configKey != ''"> and config_key like concat('%', #{configKey}, '%')</if>
+            <if test="configType != null  and configType != ''"> and config_type = #{configType}</if>
+            <if test="params.beginCreatedAt != null and params.beginCreatedAt != '' and params.endCreatedAt != null and params.endCreatedAt != ''"> and created_at between #{params.beginCreatedAt} and #{params.endCreatedAt}</if>
+        </where>
+    </select>
+
+    <select id="selectSysConfigById" parameterType="Long" resultMap="SysConfigResult">
+        <include refid="selectSysConfigVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectSysConfigByKey" parameterType="String" resultMap="SysConfigResult">
+        <include refid="selectSysConfigVo"/>
+        where config_key = #{configKey}
+    </select>
+
+    <insert id="insertSysConfig" parameterType="SysConfig" useGeneratedKeys="true" keyProperty="id">
+        insert into t_sys_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="configKey != null and configKey != ''">config_key,</if>
+            <if test="configValue != null">config_value,</if>
+            <if test="configType != null">config_type,</if>
+            <if test="remark != null">remark,</if>
+            <if test="isDeleted != null">is_deleted,</if>
+            <if test="createdAt != null">created_at,</if>
+            <if test="updatedAt != null">updated_at,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="configKey != null and configKey != ''">#{configKey},</if>
+            <if test="configValue != null">#{configValue},</if>
+            <if test="configType != null">#{configType},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="isDeleted != null">#{isDeleted},</if>
+            <if test="createdAt != null">#{createdAt},</if>
+            <if test="updatedAt != null">#{updatedAt},</if>
+        </trim>
+    </insert>
+
+    <update id="updateSysConfig" parameterType="SysConfig">
+        update t_sys_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="configKey != null and configKey != ''">config_key = #{configKey},</if>
+            <if test="configValue != null">config_value = #{configValue},</if>
+            <if test="configType != null">config_type = #{configType},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="isDeleted != null">is_deleted = #{isDeleted},</if>
+            <if test="createdAt != null">created_at = #{createdAt},</if>
+            <if test="updatedAt != null">updated_at = #{updatedAt},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSysConfigById" parameterType="Long">
+        delete from t_sys_config where id = #{id}
+    </delete>
+
+    <delete id="deleteSysConfigByIds" parameterType="String">
+        delete from t_sys_config where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

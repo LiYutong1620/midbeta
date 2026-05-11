@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.RedisSyncTempMapper">
+
+    <resultMap type="com.example.domain.RedisSyncTemp" id="RedisSyncTempResult">
+        <result property="newsId"    column="news_id"    />
+        <result property="type"    column="type"    />
+        <result property="value"    column="value"    />
+    </resultMap>
+
+    <sql id="selectRedisSyncTempVo">
+        select news_id, type, value from redis_sync_temp
+    </sql>
+
+    <select id="selectRedisSyncTempList" parameterType="com.example.domain.RedisSyncTemp" resultMap="RedisSyncTempResult">
+        <include refid="selectRedisSyncTempVo"/>
+        <where>
+            <if test="newsId != null "> and news_id = #{newsId}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+        </where>
+    </select>
+
+    <select id="selectRedisSyncTempByNewsId" parameterType="Long" resultMap="RedisSyncTempResult">
+        <include refid="selectRedisSyncTempVo"/>
+        where news_id = #{newsId}
+    </select>
+
+    <insert id="insertRedisSyncTemp" parameterType="com.example.domain.RedisSyncTemp">
+        insert into redis_sync_temp
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="newsId != null">news_id,</if>
+            <if test="type != null and type != ''">type,</if>
+            <if test="value != null and value != ''">value,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="newsId != null">#{newsId},</if>
+            <if test="type != null and type != ''">#{type},</if>
+            <if test="value != null and value != ''">#{value},</if>
+        </trim>
+    </insert>
+
+    <update id="updateRedisSyncTemp" parameterType="com.example.domain.RedisSyncTemp">
+        update redis_sync_temp
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="type != null and type != ''">type = #{type},</if>
+            <if test="value != null and value != ''">value = #{value},</if>
+        </trim>
+        where news_id = #{newsId}
+    </update>
+
+    <delete id="deleteRedisSyncTempByNewsId" parameterType="Long">
+        delete from redis_sync_temp where news_id = #{newsId}
+    </delete>
+
+    <delete id="deleteRedisSyncTempByNewsIds" parameterType="String">
+        delete from redis_sync_temp where news_id in
+        <foreach item="newsId" collection="array" open="(" separator="," close=")">
+            #{newsId}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into redis_sync_temp (news_id, type, value)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.newsId}, #{item.type}, #{item.value})
+        </foreach>
+    </insert>
+
+    <update id="truncateAll">
+        truncate table redis_sync_temp
+    </update>
+</mapper>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.NewsCommentMapper">
+
+    <resultMap type="com.example.domain.NewsComment" id="NewsCommentResult">
+        <result property="id"    column="id"    />
+        <result property="newsId"    column="news_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="content"    column="content"    />
+        <result property="auditStatus"    column="audit_status"    />
+        <result property="isHidden"    column="is_hidden"    />
+        <result property="reviewerId"    column="reviewer_id"    />
+        <result property="reviewTime"    column="review_time"    />
+        <result property="isDeleted"    column="is_deleted"    />
+        <result property="createdAt"    column="created_at"    />
+        <result property="newsTitle"    column="news_title"    />
+        <result property="nickName"    column="nick_name"    />
+    </resultMap>
+
+    <sql id="selectNewsCommentVo">
+        select c.id, c.news_id, c.user_id, c.content, c.audit_status, c.is_hidden, c.reviewer_id, c.review_time, c.is_deleted, c.created_at, n.title as news_title, u.nickname as nick_name
+        from t_news_comment c
+                 left join t_news n on c.news_id = n.id
+                 left join t_user u on c.user_id = u.id
+    </sql>
+
+    <select id="selectNewsCommentList" parameterType="com.example.domain.NewsComment" resultMap="NewsCommentResult">
+        <include refid="selectNewsCommentVo"/>
+        <where>
+            <if test="newsId != null "> and c.news_id = #{newsId}</if>
+            <if test="userId != null "> and c.user_id = #{userId}</if>
+            <if test="content != null  and content != ''"> and c.content like concat('%', #{content}, '%')</if>
+            <if test="auditStatus != null "> and c.audit_status = #{auditStatus}</if>
+            <if test="isHidden != null "> and c.is_hidden = #{isHidden}</if>
+            <if test="params.beginCreatedAt != null and params.beginCreatedAt != '' and params.endCreatedAt != null and params.endCreatedAt != ''"> and c.created_at between #{params.beginCreatedAt} and #{params.endCreatedAt}</if>
+        </where>
+    </select>
+
+    <select id="selectNewsCommentById" parameterType="Long" resultMap="NewsCommentResult">
+        <include refid="selectNewsCommentVo"/>
+        where c.id = #{id}
+    </select>
+
+    <insert id="insertNewsComment" parameterType="com.example.domain.NewsComment" useGeneratedKeys="true" keyProperty="id">
+        insert into t_news_comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="newsId != null">news_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="auditStatus != null">audit_status,</if>
+            <if test="isHidden != null">is_hidden,</if>
+            <if test="reviewerId != null">reviewer_id,</if>
+            <if test="reviewTime != null">review_time,</if>
+            <if test="isDeleted != null">is_deleted,</if>
+            <if test="createdAt != null">created_at,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="newsId != null">#{newsId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="auditStatus != null">#{auditStatus},</if>
+            <if test="isHidden != null">#{isHidden},</if>
+            <if test="reviewerId != null">#{reviewerId},</if>
+            <if test="reviewTime != null">#{reviewTime},</if>
+            <if test="isDeleted != null">#{isDeleted},</if>
+            <if test="createdAt != null">#{createdAt},</if>
+        </trim>
+    </insert>
+
+    <update id="updateNewsComment" parameterType="com.example.domain.NewsComment">
+        update t_news_comment
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="newsId != null">news_id = #{newsId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="auditStatus != null">audit_status = #{auditStatus},</if>
+            <if test="isHidden != null">is_hidden = #{isHidden},</if>
+            <if test="reviewerId != null">reviewer_id = #{reviewerId},</if>
+            <if test="reviewTime != null">review_time = #{reviewTime},</if>
+            <if test="isDeleted != null">is_deleted = #{isDeleted},</if>
+            <if test="createdAt != null">created_at = #{createdAt},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteNewsCommentById" parameterType="Long">
+        delete from t_news_comment where id = #{id}
+    </delete>
+
+    <delete id="deleteNewsCommentByIds" parameterType="String">
+        delete from t_news_comment where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

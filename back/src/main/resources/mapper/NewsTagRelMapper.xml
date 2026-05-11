@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.NewsTagRelMapper">
+    
+    <resultMap type="NewsTagRel" id="NewsTagRelResult">
+        <result property="id"    column="id"    />
+        <result property="newsId"    column="news_id"    />
+        <result property="tagId"    column="tag_id"    />
+        <result property="createdAt"    column="created_at"    />
+    </resultMap>
+
+    <sql id="selectNewsTagRelVo">
+        select id, news_id, tag_id, created_at from t_news_tag_rel
+    </sql>
+
+    <select id="selectNewsTagRelList" parameterType="NewsTagRel" resultMap="NewsTagRelResult">
+        <include refid="selectNewsTagRelVo"/>
+        <where>  
+            <if test="newsId != null "> and news_id = #{newsId}</if>
+            <if test="tagId != null "> and tag_id = #{tagId}</if>
+        </where>
+    </select>
+    
+    <select id="selectNewsTagRelById" parameterType="Long" resultMap="NewsTagRelResult">
+        <include refid="selectNewsTagRelVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertNewsTagRel" parameterType="NewsTagRel" useGeneratedKeys="true" keyProperty="id">
+        insert into t_news_tag_rel
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="newsId != null">news_id,</if>
+            <if test="tagId != null">tag_id,</if>
+            <if test="createdAt != null">created_at,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="newsId != null">#{newsId},</if>
+            <if test="tagId != null">#{tagId},</if>
+            <if test="createdAt != null">#{createdAt},</if>
+         </trim>
+    </insert>
+
+    <update id="updateNewsTagRel" parameterType="NewsTagRel">
+        update t_news_tag_rel
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="newsId != null">news_id = #{newsId},</if>
+            <if test="tagId != null">tag_id = #{tagId},</if>
+            <if test="createdAt != null">created_at = #{createdAt},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteNewsTagRelById" parameterType="Long">
+        delete from t_news_tag_rel where id = #{id}
+    </delete>
+
+    <delete id="deleteNewsTagRelByIds" parameterType="String">
+        delete from t_news_tag_rel where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,3558 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "新闻资讯发布与推荐系统 API文档",
+    "description": "我的新闻资讯系统后台接口文档",
+    "contact": {
+      "name": "Tong",
+      "email": "tong@example.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://springdoc.org"
+    },
+    "version": "v1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8888",
+      "description": "Generated server url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "评论管理",
+      "description": "评论列表、审核、删除等"
+    },
+    {
+      "name": "新闻资讯",
+      "description": "新闻发布、查询、推荐等接口"
+    },
+    {
+      "name": "登录注册",
+      "description": "用户登录、注册、注销等操作"
+    }
+  ],
+  "paths": {
+    "/system/user": {
+      "put": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "edit",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "add",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/tag": {
+      "put": {
+        "tags": [
+          "news-tag-controller"
+        ],
+        "operationId": "edit_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewsTag"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "news-tag-controller"
+        ],
+        "operationId": "add_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewsTag"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/tagRel": {
+      "put": {
+        "tags": [
+          "news-tag-rel-controller"
+        ],
+        "operationId": "edit_2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewsTagRel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "news-tag-rel-controller"
+        ],
+        "operationId": "add_2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewsTagRel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/sync": {
+      "put": {
+        "tags": [
+          "redis-sync-temp-controller"
+        ],
+        "operationId": "edit_3",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RedisSyncTemp"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "redis-sync-temp-controller"
+        ],
+        "operationId": "add_3",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RedisSyncTemp"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/statistics": {
+      "put": {
+        "tags": [
+          "news-statistics-controller"
+        ],
+        "operationId": "edit_4",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewsStatistics"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "news-statistics-controller"
+        ],
+        "operationId": "add_4",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewsStatistics"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/role": {
+      "put": {
+        "tags": [
+          "role-controller"
+        ],
+        "operationId": "edit_5",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Role"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "role-controller"
+        ],
+        "operationId": "add_5",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Role"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/operlog": {
+      "put": {
+        "tags": [
+          "sys-operation-log-controller"
+        ],
+        "operationId": "edit_6",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysOperationLog"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "sys-operation-log-controller"
+        ],
+        "operationId": "add_6",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysOperationLog"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/news": {
+      "put": {
+        "tags": [
+          "新闻资讯"
+        ],
+        "operationId": "edit_7",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/News"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "新闻资讯"
+        ],
+        "operationId": "add_7",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/News"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/like": {
+      "put": {
+        "tags": [
+          "news-like-controller"
+        ],
+        "operationId": "edit_8",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewsLike"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "news-like-controller"
+        ],
+        "operationId": "add_8",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewsLike"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/config": {
+      "put": {
+        "tags": [
+          "sys-config-controller"
+        ],
+        "operationId": "edit_9",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysConfig"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "sys-config-controller"
+        ],
+        "operationId": "add_9",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysConfig"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/comment": {
+      "put": {
+        "tags": [
+          "评论管理"
+        ],
+        "operationId": "edit_10",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewsComment"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "评论管理"
+        ],
+        "operationId": "add_10",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewsComment"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/comment/audit/{id}/{status}": {
+      "put": {
+        "tags": [
+          "评论管理"
+        ],
+        "summary": "审核/状态变更",
+        "description": "修改评论的审核状态或隐藏状态",
+        "operationId": "audit",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "status",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/category": {
+      "put": {
+        "tags": [
+          "news-category-controller"
+        ],
+        "operationId": "edit_11",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewsCategory"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "news-category-controller"
+        ],
+        "operationId": "add_11",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewsCategory"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/browse": {
+      "put": {
+        "tags": [
+          "user-browse-controller"
+        ],
+        "operationId": "edit_12",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserBrowse"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "user-browse-controller"
+        ],
+        "operationId": "add_12",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserBrowse"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/user/unlock/{username}": {
+      "post": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "unlock",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/user/export": {
+      "post": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "export",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/system/tagRel/export": {
+      "post": {
+        "tags": [
+          "news-tag-rel-controller"
+        ],
+        "operationId": "export_1",
+        "parameters": [
+          {
+            "name": "newsTagRel",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/NewsTagRel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/system/tag/export": {
+      "post": {
+        "tags": [
+          "news-tag-controller"
+        ],
+        "operationId": "export_2",
+        "parameters": [
+          {
+            "name": "newsTag",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/NewsTag"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/system/sync/export": {
+      "post": {
+        "tags": [
+          "redis-sync-temp-controller"
+        ],
+        "operationId": "export_3",
+        "parameters": [
+          {
+            "name": "redisSyncTemp",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/RedisSyncTemp"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/system/statistics/export": {
+      "post": {
+        "tags": [
+          "news-statistics-controller"
+        ],
+        "operationId": "export_4",
+        "parameters": [
+          {
+            "name": "newsStatistics",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/NewsStatistics"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/system/role/export": {
+      "post": {
+        "tags": [
+          "role-controller"
+        ],
+        "operationId": "export_5",
+        "parameters": [
+          {
+            "name": "role",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Role"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/system/operlog/export": {
+      "post": {
+        "tags": [
+          "sys-operation-log-controller"
+        ],
+        "operationId": "export_6",
+        "parameters": [
+          {
+            "name": "sysOperationLog",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SysOperationLog"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/system/news/export": {
+      "post": {
+        "tags": [
+          "新闻资讯"
+        ],
+        "operationId": "export_7",
+        "parameters": [
+          {
+            "name": "news",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/News"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/system/like/export": {
+      "post": {
+        "tags": [
+          "news-like-controller"
+        ],
+        "operationId": "export_8",
+        "parameters": [
+          {
+            "name": "newsLike",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/NewsLike"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/system/config/export": {
+      "post": {
+        "tags": [
+          "sys-config-controller"
+        ],
+        "operationId": "export_9",
+        "parameters": [
+          {
+            "name": "sysConfig",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SysConfig"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/system/comment/export": {
+      "post": {
+        "tags": [
+          "评论管理"
+        ],
+        "operationId": "export_10",
+        "parameters": [
+          {
+            "name": "newsComment",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/NewsComment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/system/category/export": {
+      "post": {
+        "tags": [
+          "news-category-controller"
+        ],
+        "operationId": "export_11",
+        "parameters": [
+          {
+            "name": "newsCategory",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/NewsCategory"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/system/browse/export": {
+      "post": {
+        "tags": [
+          "user-browse-controller"
+        ],
+        "operationId": "export_12",
+        "parameters": [
+          {
+            "name": "userBrowse",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UserBrowse"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/register": {
+      "post": {
+        "tags": [
+          "登录注册"
+        ],
+        "summary": "用户注册",
+        "operationId": "register",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "get": {
+        "tags": [
+          "登录注册"
+        ],
+        "summary": "未登录提示",
+        "description": "Spring Security 未分配权限时的默认跳转",
+        "operationId": "loginPage",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "登录注册"
+        ],
+        "summary": "用户登录",
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/user/{id}": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "getInfo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/user/list": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "list",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TableDataInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/tagRel/{id}": {
+      "get": {
+        "tags": [
+          "news-tag-rel-controller"
+        ],
+        "operationId": "getInfo_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/tagRel/list": {
+      "get": {
+        "tags": [
+          "news-tag-rel-controller"
+        ],
+        "operationId": "list_1",
+        "parameters": [
+          {
+            "name": "newsTagRel",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/NewsTagRel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TableDataInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/tag/{id}": {
+      "get": {
+        "tags": [
+          "news-tag-controller"
+        ],
+        "operationId": "getInfo_2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/tag/list": {
+      "get": {
+        "tags": [
+          "news-tag-controller"
+        ],
+        "operationId": "list_2",
+        "parameters": [
+          {
+            "name": "newsTag",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/NewsTag"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TableDataInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/sync/{newsId}": {
+      "get": {
+        "tags": [
+          "redis-sync-temp-controller"
+        ],
+        "operationId": "getInfo_3",
+        "parameters": [
+          {
+            "name": "newsId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/sync/list": {
+      "get": {
+        "tags": [
+          "redis-sync-temp-controller"
+        ],
+        "operationId": "list_3",
+        "parameters": [
+          {
+            "name": "redisSyncTemp",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/RedisSyncTemp"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TableDataInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/statistics/{id}": {
+      "get": {
+        "tags": [
+          "news-statistics-controller"
+        ],
+        "operationId": "getInfo_4",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/statistics/list": {
+      "get": {
+        "tags": [
+          "news-statistics-controller"
+        ],
+        "operationId": "list_4",
+        "parameters": [
+          {
+            "name": "newsStatistics",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/NewsStatistics"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TableDataInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/role/{id}": {
+      "get": {
+        "tags": [
+          "role-controller"
+        ],
+        "operationId": "getInfo_5",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/role/list": {
+      "get": {
+        "tags": [
+          "role-controller"
+        ],
+        "operationId": "list_5",
+        "parameters": [
+          {
+            "name": "role",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Role"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TableDataInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/operlog/{id}": {
+      "get": {
+        "tags": [
+          "sys-operation-log-controller"
+        ],
+        "operationId": "getInfo_6",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/operlog/list": {
+      "get": {
+        "tags": [
+          "sys-operation-log-controller"
+        ],
+        "operationId": "list_6",
+        "parameters": [
+          {
+            "name": "sysOperationLog",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SysOperationLog"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TableDataInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/news/{id}": {
+      "get": {
+        "tags": [
+          "新闻资讯"
+        ],
+        "operationId": "getInfo_7",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/news/recommend/{newsId}": {
+      "get": {
+        "tags": [
+          "新闻资讯"
+        ],
+        "summary": "获取推荐新闻",
+        "description": "包含同分类推荐和基于用户历史的兴趣推荐",
+        "operationId": "getRecommendList",
+        "parameters": [
+          {
+            "name": "newsId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/news/public/list": {
+      "get": {
+        "tags": [
+          "新闻资讯"
+        ],
+        "summary": "前台新闻列表(分页)",
+        "operationId": "publicList",
+        "parameters": [
+          {
+            "name": "news",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/News"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TableDataInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/news/list": {
+      "get": {
+        "tags": [
+          "新闻资讯"
+        ],
+        "summary": "查询新闻列表(管理端)",
+        "operationId": "list_7",
+        "parameters": [
+          {
+            "name": "news",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/News"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TableDataInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/like/{id}": {
+      "get": {
+        "tags": [
+          "news-like-controller"
+        ],
+        "operationId": "getInfo_8",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/like/list": {
+      "get": {
+        "tags": [
+          "news-like-controller"
+        ],
+        "operationId": "list_8",
+        "parameters": [
+          {
+            "name": "newsLike",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/NewsLike"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TableDataInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/config/{id}": {
+      "get": {
+        "tags": [
+          "sys-config-controller"
+        ],
+        "operationId": "getInfo_9",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/config/list": {
+      "get": {
+        "tags": [
+          "sys-config-controller"
+        ],
+        "operationId": "list_9",
+        "parameters": [
+          {
+            "name": "sysConfig",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SysConfig"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TableDataInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/comment/{id}": {
+      "get": {
+        "tags": [
+          "评论管理"
+        ],
+        "operationId": "getInfo_10",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/comment/list": {
+      "get": {
+        "tags": [
+          "评论管理"
+        ],
+        "operationId": "list_10",
+        "parameters": [
+          {
+            "name": "newsComment",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/NewsComment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TableDataInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/category/{id}": {
+      "get": {
+        "tags": [
+          "news-category-controller"
+        ],
+        "operationId": "getInfo_11",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/category/list": {
+      "get": {
+        "tags": [
+          "news-category-controller"
+        ],
+        "operationId": "list_11",
+        "parameters": [
+          {
+            "name": "newsCategory",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/NewsCategory"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/browse/{id}": {
+      "get": {
+        "tags": [
+          "user-browse-controller"
+        ],
+        "operationId": "getInfo_12",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/browse/list": {
+      "get": {
+        "tags": [
+          "user-browse-controller"
+        ],
+        "operationId": "list_12",
+        "parameters": [
+          {
+            "name": "userBrowse",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UserBrowse"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TableDataInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/user/{ids}": {
+      "delete": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "remove",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/tagRel/{ids}": {
+      "delete": {
+        "tags": [
+          "news-tag-rel-controller"
+        ],
+        "operationId": "remove_1",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/tag/{ids}": {
+      "delete": {
+        "tags": [
+          "news-tag-controller"
+        ],
+        "operationId": "remove_2",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/sync/{newsIds}": {
+      "delete": {
+        "tags": [
+          "redis-sync-temp-controller"
+        ],
+        "operationId": "remove_3",
+        "parameters": [
+          {
+            "name": "newsIds",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/statistics/{ids}": {
+      "delete": {
+        "tags": [
+          "news-statistics-controller"
+        ],
+        "operationId": "remove_4",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/role/{ids}": {
+      "delete": {
+        "tags": [
+          "role-controller"
+        ],
+        "operationId": "remove_5",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/operlog/{ids}": {
+      "delete": {
+        "tags": [
+          "sys-operation-log-controller"
+        ],
+        "operationId": "remove_6",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/news/{ids}": {
+      "delete": {
+        "tags": [
+          "新闻资讯"
+        ],
+        "operationId": "remove_7",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/like/{ids}": {
+      "delete": {
+        "tags": [
+          "news-like-controller"
+        ],
+        "operationId": "remove_8",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/config/{ids}": {
+      "delete": {
+        "tags": [
+          "sys-config-controller"
+        ],
+        "operationId": "remove_9",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/comment/{ids}": {
+      "delete": {
+        "tags": [
+          "评论管理"
+        ],
+        "operationId": "remove_10",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/category/{ids}": {
+      "delete": {
+        "tags": [
+          "news-category-controller"
+        ],
+        "operationId": "remove_11",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/browse/{ids}": {
+      "delete": {
+        "tags": [
+          "user-browse-controller"
+        ],
+        "operationId": "remove_12",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjaxResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "string",
+            "refType": null
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "updateBy": {
+            "type": "string",
+            "refType": null
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "remark": {
+            "type": "string",
+            "refType": null
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "refType": null
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "username": {
+            "type": "string",
+            "refType": null
+          },
+          "passwordHash": {
+            "type": "string",
+            "refType": null
+          },
+          "nickname": {
+            "type": "string",
+            "refType": null
+          },
+          "roleId": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "refType": null
+          },
+          "isDeleted": {
+            "type": "integer",
+            "format": "int32",
+            "refType": null
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "lastLoginAt": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "lastLoginIp": {
+            "type": "string",
+            "refType": null
+          }
+        }
+      },
+      "AjaxResult": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "boolean"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "warn": {
+            "type": "boolean"
+          },
+          "empty": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "NewsTag": {
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "string",
+            "refType": null
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "updateBy": {
+            "type": "string",
+            "refType": null
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "remark": {
+            "type": "string",
+            "refType": null
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "refType": null
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "tagName": {
+            "type": "string",
+            "refType": null
+          },
+          "isDeleted": {
+            "type": "integer",
+            "format": "int32",
+            "refType": null
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          }
+        }
+      },
+      "NewsTagRel": {
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "string",
+            "refType": null
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "updateBy": {
+            "type": "string",
+            "refType": null
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "remark": {
+            "type": "string",
+            "refType": null
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "refType": null
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "newsId": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "tagId": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          }
+        }
+      },
+      "RedisSyncTemp": {
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "string",
+            "refType": null
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "updateBy": {
+            "type": "string",
+            "refType": null
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "remark": {
+            "type": "string",
+            "refType": null
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "refType": null
+          },
+          "newsId": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "type": {
+            "type": "string",
+            "refType": null
+          },
+          "value": {
+            "type": "string",
+            "refType": null
+          }
+        }
+      },
+      "NewsStatistics": {
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "string",
+            "refType": null
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "updateBy": {
+            "type": "string",
+            "refType": null
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "remark": {
+            "type": "string",
+            "refType": null
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "refType": null
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "newsId": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "readCount": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "likeCount": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "commentCount": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "syncVersion": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "syncTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "isDeleted": {
+            "type": "integer",
+            "format": "int32",
+            "refType": null
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          }
+        }
+      },
+      "Role": {
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "string",
+            "refType": null
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "updateBy": {
+            "type": "string",
+            "refType": null
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "remark": {
+            "type": "string",
+            "refType": null
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "refType": null
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "roleName": {
+            "type": "string",
+            "refType": null
+          },
+          "roleCode": {
+            "type": "string",
+            "refType": null
+          },
+          "isDeleted": {
+            "type": "integer",
+            "format": "int32",
+            "refType": null
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          }
+        }
+      },
+      "SysOperationLog": {
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "string",
+            "refType": null
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "updateBy": {
+            "type": "string",
+            "refType": null
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "remark": {
+            "type": "string",
+            "refType": null
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "refType": null
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "operationType": {
+            "type": "string",
+            "refType": null
+          },
+          "operationContent": {
+            "type": "string",
+            "refType": null
+          },
+          "operationResult": {
+            "type": "integer",
+            "format": "int32",
+            "refType": null
+          },
+          "operationIp": {
+            "type": "string",
+            "refType": null
+          },
+          "isDeleted": {
+            "type": "integer",
+            "format": "int32",
+            "refType": null
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          }
+        }
+      },
+      "News": {
+        "required": [
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "string",
+            "refType": null
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "updateBy": {
+            "type": "string",
+            "refType": null
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "remark": {
+            "type": "string",
+            "refType": null
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "refType": null
+          },
+          "id": {
+            "type": "integer",
+            "description": "主键ID",
+            "format": "int64",
+            "refType": null
+          },
+          "title": {
+            "type": "string",
+            "description": "新闻标题",
+            "refType": null
+          },
+          "summary": {
+            "type": "string",
+            "description": "新闻摘要",
+            "refType": null
+          },
+          "categoryId": {
+            "type": "integer",
+            "description": "所属分类ID",
+            "format": "int64",
+            "refType": null
+          },
+          "coverUrl": {
+            "type": "string",
+            "refType": null
+          },
+          "content": {
+            "type": "string",
+            "refType": null
+          },
+          "publishStatus": {
+            "type": "integer",
+            "format": "int32",
+            "refType": null
+          },
+          "shelfStatus": {
+            "type": "integer",
+            "format": "int32",
+            "refType": null
+          },
+          "publishUserId": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "publishTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "version": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "isDeleted": {
+            "type": "integer",
+            "format": "int32",
+            "refType": null
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "categoryName": {
+            "type": "string",
+            "refType": null
+          }
+        },
+        "description": "新闻资讯对象"
+      },
+      "NewsLike": {
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "string",
+            "refType": null
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "updateBy": {
+            "type": "string",
+            "refType": null
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "remark": {
+            "type": "string",
+            "refType": null
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "refType": null
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "newsId": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "likeStatus": {
+            "type": "integer",
+            "format": "int32",
+            "refType": null
+          },
+          "isDeleted": {
+            "type": "integer",
+            "format": "int32",
+            "refType": null
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          }
+        }
+      },
+      "SysConfig": {
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "string",
+            "refType": null
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "updateBy": {
+            "type": "string",
+            "refType": null
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "remark": {
+            "type": "string",
+            "refType": null
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "refType": null
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "configKey": {
+            "type": "string",
+            "refType": null
+          },
+          "configValue": {
+            "type": "string",
+            "refType": null
+          },
+          "configType": {
+            "type": "string",
+            "refType": null
+          },
+          "isDeleted": {
+            "type": "integer",
+            "format": "int32",
+            "refType": null
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          }
+        }
+      },
+      "NewsComment": {
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "string",
+            "refType": null
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "updateBy": {
+            "type": "string",
+            "refType": null
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "remark": {
+            "type": "string",
+            "refType": null
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "refType": null
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "newsId": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "content": {
+            "type": "string",
+            "refType": null
+          },
+          "auditStatus": {
+            "type": "integer",
+            "format": "int32",
+            "refType": null
+          },
+          "isHidden": {
+            "type": "integer",
+            "format": "int32",
+            "refType": null
+          },
+          "reviewerId": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "reviewTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "newsTitle": {
+            "type": "string",
+            "refType": null
+          },
+          "nickName": {
+            "type": "string",
+            "refType": null
+          },
+          "isDeleted": {
+            "type": "integer",
+            "format": "int32",
+            "refType": null
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          }
+        }
+      },
+      "NewsCategory": {
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "string",
+            "refType": null
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "updateBy": {
+            "type": "string",
+            "refType": null
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "remark": {
+            "type": "string",
+            "refType": null
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "refType": null
+          },
+          "parentName": {
+            "type": "string",
+            "refType": null
+          },
+          "parentId": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "orderNum": {
+            "type": "integer",
+            "format": "int32",
+            "refType": null
+          },
+          "ancestors": {
+            "type": "string",
+            "refType": null
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "refType": "object"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "categoryName": {
+            "type": "string",
+            "refType": null
+          },
+          "sort": {
+            "type": "integer",
+            "format": "int32",
+            "refType": null
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "refType": null
+          },
+          "isDeleted": {
+            "type": "integer",
+            "format": "int32",
+            "refType": null
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          }
+        }
+      },
+      "UserBrowse": {
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "string",
+            "refType": null
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "updateBy": {
+            "type": "string",
+            "refType": null
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "remark": {
+            "type": "string",
+            "refType": null
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "refType": null
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "newsId": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "browseTime": {
+            "type": "string",
+            "format": "date-time",
+            "refType": null
+          },
+          "browseDuration": {
+            "type": "integer",
+            "format": "int64",
+            "refType": null
+          },
+          "isDeleted": {
+            "type": "integer",
+            "format": "int32",
+            "refType": null
+          }
+        }
+      },
+      "LoginBody": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "refType": null
+          },
+          "password": {
+            "type": "string",
+            "refType": null
+          },
+          "code": {
+            "type": "string",
+            "refType": null
+          },
+          "uuid": {
+            "type": "string",
+            "refType": null
+          }
+        }
+      },
+      "TableDataInfo": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
