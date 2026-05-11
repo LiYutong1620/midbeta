@@ -7,7 +7,7 @@ export const useUserStore = defineStore('user', () => {
   const userInfo = ref<any>({});
 
   const isLoggedIn = computed(() => !!token.value);
-  const nickname = computed(() => userInfo.value.nickname || userInfo.value.username || '用户');
+  const nickname = computed(() => userInfo.value.nickname || userInfo.value.nickName ||userInfo.value.username || '用户');
   const isAdmin = computed(() => {
     // 假设 roleId=1 是管理员；如果 User 有 roleCode 字段可改为 userInfo.value.roleCode === 'admin'
     return userInfo.value.roleId == 1;

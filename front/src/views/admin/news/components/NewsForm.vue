@@ -162,13 +162,16 @@ const reset = () => {
 const getCategoryList = async () => {
   try {
     const res: any = await request.get('/system/category/list');
+    let list: any[] = [];
     if (Array.isArray(res)) {
-      categories.value = res;
+      list = res;
     } else if (res.data && Array.isArray(res.data)) {
-      categories.value = res.data;
+      list = res.data;
     } else if (res.rows && Array.isArray(res.rows)) {
-      categories.value = res.rows;
+      list = res.rows;
     }
+    // 只保留启用的分类（status === 1）
+    categories.value = list.filter((cat: any) => cat.status == 1);
   } catch (error) {
     console.error('Failed to get categories:', error);
   }

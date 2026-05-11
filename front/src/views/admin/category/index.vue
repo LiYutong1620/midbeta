@@ -26,8 +26,8 @@
         <el-table-column prop="sort" label="排序权重" width="100" align="center" />
         <el-table-column prop="status" label="状态" width="100" align="center">
           <template #default="{ row }">
-            <span :class="row.status === 0 ? 'text-emerald-600 bg-emerald-50' : 'text-slate-400 bg-slate-50'" class="px-2 py-1 rounded text-xs font-bold uppercase">
-              {{ row.status === 0 ? '启用' : '禁用' }}
+            <span :class="row.status === 1 ? 'text-emerald-600 bg-emerald-50' : 'text-slate-400 bg-slate-50'" class="px-2 py-1 rounded text-xs font-bold uppercase">
+              {{ row.status === 1 ? '启用' : '禁用' }}
             </span>
           </template>
         </el-table-column>
@@ -51,7 +51,7 @@
       destroy-on-close
     >
       <el-form :model="form" label-width="80px" class="mt-4">
-        <el-form-item label="父级分类">
+        <el-form-item label="亲级分类">
           <el-tree-select
             v-model="form.parentId"
             :data="treeOptions"
@@ -69,8 +69,8 @@
         </el-form-item>
         <el-form-item label="状态">
           <el-radio-group v-model="form.status">
-            <el-radio :label="0">启用</el-radio>
-            <el-radio :label="1">禁用</el-radio>
+            <el-radio :label="1">启用</el-radio>
+            <el-radio :label="0">禁用</el-radio>
           </el-radio-group>
         </el-form-item>
       </el-form>
@@ -101,7 +101,7 @@ const form = ref({
   parentId: 0,
   categoryName: '',
   sort: 0,
-  status: 0
+  status: 1
 });
 
 const getList = async () => {
@@ -150,7 +150,7 @@ const handleAdd = () => {
     parentId: 0,
     categoryName: '',
     sort: 0,
-    status: 0
+    status: 1
   };
   dialogVisible.value = true;
 };

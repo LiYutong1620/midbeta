@@ -21,8 +21,8 @@
         </el-form-item>
         <el-form-item label="状态">
           <el-select v-model="queryParams.status" placeholder="用户状态" clearable class="w-32">
-            <el-option label="正常" :value="0" />
-            <el-option label="停用" :value="1" />
+            <el-option label="正常" :value="1" />
+            <el-option label="停用" :value="0" />
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -41,8 +41,8 @@
           <template #default="{ row }">
             <el-switch
               v-model="row.status"
-              :active-value="0"
-              :inactive-value="1"
+              :active-value="1"
+              :inactive-value="0"
               @change="handleStatusChange(row)"
             />
           </template>
@@ -101,8 +101,8 @@
         </el-form-item>
         <el-form-item label="状态">
           <el-radio-group v-model="form.status">
-            <el-radio :value="0">正常</el-radio>
-            <el-radio :value="1">停用</el-radio>
+            <el-radio :value="1">正常</el-radio>
+            <el-radio :value="0">停用</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="备注">
@@ -186,7 +186,7 @@ const handleAdd = () => {
     nickname: '',
     passwordHash: '',
     roleId: undefined,
-    status: 0,
+    status: 1,
     remark: ''
   };
   dialogVisible.value = true;
@@ -199,7 +199,7 @@ const handleEdit = async (row: any) => {
 };
 
 const handleStatusChange = async (row: any) => {
-  const text = row.status === 0 ? '启用' : '停用';
+  const text = row.status === 1 ? '启用' : '停用';
   try {
     await ElMessageBox.confirm(`确认要"${text}""${row.username}"用户吗？`);
     await request.put('/system/user', { id: row.id, status: row.status });

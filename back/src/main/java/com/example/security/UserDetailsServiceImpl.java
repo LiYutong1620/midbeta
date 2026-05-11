@@ -46,14 +46,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         sysUser.setRoleId(user.getRoleId());
 
         Set<String> permissions = new HashSet<>();
-        // 简单处理角色权限
         if (user.getRoleId() != null && user.getRoleId() == 1L) {
-            permissions.add("admin");
-            permissions.add("*:*:*");
+            permissions.add("ROLE_ADMIN");          // 匹配 hasRole('ADMIN')
+            permissions.add("admin");               // 兼容其它地方直接判断字符串
+            permissions.add("*:*:*");               // 匹配 @ss.hasPermi
         } else {
+            permissions.add("ROLE_USER");           // 普通用户角色
             permissions.add("common");
         }
 
         return new LoginUser(user.getId(), null, sysUser, permissions);
     }
+
 }
