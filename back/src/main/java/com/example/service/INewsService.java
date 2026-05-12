@@ -58,4 +58,6 @@ public interface INewsService
      * @return 结果
      */
     public int deleteNewsById(Long id);
+
+    News selectNewsByIdForView(Long id);
 }

@@ -58,4 +58,7 @@ public interface NewsMapper
      * @return 结果
      */
     public int deleteNewsByIds(Long[] ids);
+
+    // 增加阅读量
+    void incrementReadCount(Long newsId);
 }

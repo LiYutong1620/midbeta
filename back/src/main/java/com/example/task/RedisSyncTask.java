@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Redis 数据定时同步任务
@@ -35,35 +36,42 @@ public class RedisSyncTask {
         try {
             List<RedisSyncTemp> tempList = new ArrayList<>();
 
-            // 1. 获取所有阅读量 Key: news:read_count:{id}
-            Collection<String> readKeys = redisCache.keys("news:read_count:*");
-            for (String key : readKeys) {
-                Long newsId = Long.valueOf(key.split(":")[2]);
-                Object val = redisCache.redisTemplate.opsForValue().get(key);
-                if (val != null) {
-                    RedisSyncTemp temp = new RedisSyncTemp();
-                    temp.setNewsId(newsId);
-                    temp.setType("view");
-                    temp.setValue(val.toString());
-                    tempList.add(temp);
+            // 阅读量
+            Set<String> readKeys = redisCache.redisTemplate.keys("news:read_count:*");
+            if (readKeys != null) {
+                for (String key : readKeys) {
+                    try {
+                        Long newsId = Long.valueOf(key.split(":")[2]);
+                        Object val = redisCache.redisTemplate.opsForValue().get(key);
+                        if (val != null) {
+                            RedisSyncTemp temp = new RedisSyncTemp();
+                            temp.setNewsId(newsId);
+                            temp.setType("view");
+                            temp.setValue(val.toString());
+                            tempList.add(temp);
+                        }
+                    } catch (Exception ignored) {}
                 }
             }
 
-            // 2. 获取所有点赞量 Key: news:like_count:{id}
-            Collection<String> likeKeys = redisCache.keys("news:like_count:*");
-            for (String key : likeKeys) {
-                Long newsId = Long.valueOf(key.split(":")[2]);
-                Object val = redisCache.redisTemplate.opsForValue().get(key);
-                if (val != null) {
-                    RedisSyncTemp temp = new RedisSyncTemp();
-                    temp.setNewsId(newsId);
-                    temp.setType("like");
-                    temp.setValue(val.toString());
-                    tempList.add(temp);
+            // 点赞量
+            Set<String> likeKeys = redisCache.redisTemplate.keys("news:like_count:*");
+            if (likeKeys != null) {
+                for (String key : likeKeys) {
+                    try {
+                        Long newsId = Long.valueOf(key.split(":")[2]);
+                        Object val = redisCache.redisTemplate.opsForValue().get(key);
+                        if (val != null) {
+                            RedisSyncTemp temp = new RedisSyncTemp();
+                            temp.setNewsId(newsId);
+                            temp.setType("like");
+                            temp.setValue(val.toString());
+                            tempList.add(temp);
+                        }
+                    } catch (Exception ignored) {}
                 }
             }
 
-            // 3. 执行同步
             if (!tempList.isEmpty()) {
                 tempService.truncateAll();
                 tempService.insertRedisSyncTempBatch(tempList);

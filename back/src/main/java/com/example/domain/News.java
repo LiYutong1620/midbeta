@@ -215,6 +215,21 @@ public class News extends BaseEntity
         return updatedAt;
     }
 
+    private Integer readCount;
+    private Integer likeCount;
+
+    public Integer getReadCount() {
+        return readCount;
+    }
+    public void setReadCount(Integer readCount) {
+        this.readCount = readCount;
+    }
+    public Integer getLikeCount() {
+        return likeCount;
+    }
+    public void setLikeCount(Integer likeCount) {
+        this.likeCount = likeCount;
+    }
 
     @Excel(name = "分类名称")
     private String categoryName;

@@ -3,7 +3,7 @@
     <!-- Hero Banner -->
     <section class="relative rounded-3xl overflow-hidden h-80 shadow-2xl group">
       <img 
-        src="https://images.unsplash.com/photo-1504711432869-efd5971ee142?auto=format&fit=crop&q=80&w=2670" 
+        src="https://picsum.photos/2670/400" 
         alt="Banner" 
         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
       />
@@ -49,7 +49,7 @@
             <!-- Image Wrap -->
             <div class="md:w-56 h-40 flex-shrink-0 rounded-xl overflow-hidden relative">
               <img 
-                :src="news.coverUrl || 'https://images.unsplash.com/photo-1585829365234-750523078430?q=80&w=800'" 
+                :src="news.coverUrl ? getFullUrl(news.coverUrl) : 'https://images.unsplash.com/photo-1585829365234-750523078430?q=80&w=800'" 
                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
               />
               <div class="absolute inset-0 bg-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -177,6 +177,7 @@
 </template>
 
 <script setup lang="ts">
+import { getFullUrl } from '@/utils/image';
 import { ref, reactive, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { 

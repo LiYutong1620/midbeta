@@ -66,6 +66,13 @@
         where id = #{id}
     </update>
 
+    <update id="incrementLikeCount">
+        update t_news_statistics set like_count = like_count + 1 where news_id = #{newsId}
+    </update>
+    <update id="decrementLikeCount">
+        update t_news_statistics set like_count = like_count - 1 where news_id = #{newsId} and like_count > 0
+    </update>
+
     <delete id="deleteNewsLikeById" parameterType="Long">
         delete from t_news_like where id = #{id}
     </delete>

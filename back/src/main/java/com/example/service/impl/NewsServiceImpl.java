@@ -38,46 +38,68 @@ public class NewsServiceImpl implements INewsService
     /**
      * 获取新闻详情
      */
+    /**
+     * 普通查询（不累加阅读量，给后台、推荐等内部用）
+     */
     @Override
-    public News selectNewsById(Long id)
-    {
-        // 1. 获取当前用户ID（用于记录足迹）
+    public News selectNewsById(Long id) {
+        String cacheKey = CACHE_KEY_PREFIX + id;
+        News news = redisCache.getCacheObject(cacheKey);
+        if (news == null) {
+            news = newsMapper.selectNewsById(id);
+            if (news != null) {
+                redisCache.setCacheObject(cacheKey, news, 2, TimeUnit.HOURS);
+            }
+        }
+        return news;
+    }
+
+    /**
+     * 前台浏览专用（累加阅读量 + 防重复 + 记录足迹）
+     */
+    @Override
+    public News selectNewsByIdForView(Long id) {
         Long userId = null;
         try {
             userId = SecurityUtils.getUserId();
-        } catch (Exception e) {
-            // 未登录用户不记录足迹
-        }
+        } catch (Exception e) {}
 
-        // 2. 查询缓存（Redis 缓存应用 a: 缓解大文本压力）
         String cacheKey = CACHE_KEY_PREFIX + id;
         News news = redisCache.getCacheObject(cacheKey);
-
         if (news == null) {
-            // 缓存失效，查询数据库
             news = newsMapper.selectNewsById(id);
             if (news != null) {
-                // 存入缓存，设置2小时过期
                 redisCache.setCacheObject(cacheKey, news, 2, TimeUnit.HOURS);
             }
         }
 
         if (news != null) {
-            // 3. 阅读量 Redis 计数器自增 (Redis 缓存应用 b)
-            redisCache.redisTemplate.opsForValue().increment("news:read_count:" + id);
+            // 防止短时间内重复累加（同一用户+同一新闻1分钟内只计1次）
+            boolean shouldIncrement = true;
+            if (userId != null) {
+                String lockKey = "news:read_lock:" + userId + ":" + id;
+                Boolean lock = redisCache.redisTemplate.opsForValue()
+                        .setIfAbsent(lockKey, "1", 1, TimeUnit.MINUTES);
+                shouldIncrement = (lock != null && lock);
+            }
+            if (shouldIncrement) {
+                redisCache.redisTemplate.opsForValue().increment("news:read_count:" + id);
+                newsMapper.incrementReadCount(id);
+                redisCache.deleteObject(cacheKey);
+                redisCache.deleteObject(HOME_LIST_KEY);
+            }
 
-            // 4. 用户行为记录：更新 Redis ZSET 历史记录 (Redis 缓存应用 d)
+            // 记录足迹
             if (userId != null) {
                 String historyKey = "user:history:" + userId;
-                // 以当前时间戳为 Score，新闻 ID 为 Value
                 redisCache.redisTemplate.opsForZSet().add(historyKey, id, System.currentTimeMillis());
-                // 只保留最近的 10 条（可选逻辑）
                 redisCache.redisTemplate.opsForZSet().removeRange(historyKey, 0, -11);
             }
         }
-
         return news;
     }
+
+
     /**
      * 查询新闻资讯列表
      *

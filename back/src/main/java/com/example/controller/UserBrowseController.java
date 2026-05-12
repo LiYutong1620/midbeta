@@ -1,6 +1,8 @@
 package com.example.controller;
 
 import java.util.List;
+
+import com.ruoyi.common.utils.SecurityUtils;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,11 +74,11 @@ public class UserBrowseController extends BaseController
     /**
      * 新增浏览历史
      */
-    @PreAuthorize("@ss.hasPermi('system:browse:add')")
     @Log(title = "浏览历史", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody UserBrowse userBrowse)
-    {
+    public AjaxResult add(@RequestBody UserBrowse userBrowse) {
+        userBrowse.setUserId(SecurityUtils.getUserId());          // 自动填入登录用户
+        userBrowse.setBrowseTime(new java.util.Date());           // 设置浏览时间
         return toAjax(userBrowseService.insertUserBrowse(userBrowse));
     }
 

@@ -81,14 +81,14 @@
           <span class="text-sm">角色管理</span>
         </router-link>
 
-        <router-link 
+        <!-- <router-link 
           to="/admin/settings" 
           class="flex items-center px-4 py-3 rounded-md transition-all duration-200"
           :class="route.path === '/admin/settings' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-900/40' : 'text-slate-400 hover:bg-slate-800'"
         >
           <Settings class="w-5 h-5 mr-3" :class="route.path === '/admin/settings' ? 'text-white/80' : 'text-slate-500'" />
           <span class="text-sm">系统配置</span>
-        </router-link>
+        </router-link> -->
       </nav>
 
       <div class="p-6 border-t border-slate-800">

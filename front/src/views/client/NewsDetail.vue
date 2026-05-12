@@ -36,7 +36,7 @@
 
       <!-- Featured Image -->
       <div v-if="news.coverUrl" class="mt-8 rounded-3xl overflow-hidden shadow-2xl h-[450px]">
-        <img :src="news.coverUrl" class="w-full h-full object-cover" />
+        <img :src="getFullUrl(news.coverUrl)" class="w-full h-full object-cover" />
       </div>
 
       <!-- Article Content -->
@@ -59,7 +59,7 @@
           @click="goToNews(rec.id)"
         >
           <div class="aspect-video rounded-2xl overflow-hidden bg-slate-100 border border-slate-100 transition-hover group-hover:shadow-lg">
-            <img :src="rec.coverUrl || 'https://images.unsplash.com/photo-1585829365234-750523078430?q=80&w=800'" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <img :src="rec.coverUrl ? getFullUrl(rec.coverUrl) : 'https://images.unsplash.com/photo-1585829365234-750523078430?q=80&w=800'" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
           </div>
           <p class="text-xs font-bold text-indigo-600 uppercase tracking-widest">{{ rec.categoryName || 'NEWS' }}</p>
           <h4 class="font-bold text-slate-800 group-hover:text-indigo-600 transition-colors line-clamp-2 leading-snug">
@@ -121,6 +121,7 @@
 </template>
 
 <script setup lang="ts">
+import { getFullUrl } from '@/utils/image';
 import { ref, onMounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { 
@@ -145,7 +146,7 @@ const submittingComment = ref(false);
 const getNewsDetail = async (id: number) => {
   loading.value = true;
   try {
-    const res = await request.get<any, any>(`/system/news/${id}`);
+    const res = await request.get<any, any>(`/system/news/public/${id}`);
     news.value = res.data || res;
     loading.value = false;
     getRecommendations(id);

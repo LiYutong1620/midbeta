@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.ruoyi.common.utils.SecurityUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
@@ -40,7 +41,6 @@ public class NewsCommentController extends BaseController
     /**
      * 查询评论审核列表
      */
-    @PreAuthorize("@ss.hasPermi('system:comment:list')")
     @GetMapping("/list")
     public TableDataInfo list(NewsComment newsComment)
     {
@@ -75,11 +75,10 @@ public class NewsCommentController extends BaseController
     /**
      * 新增评论审核
      */
-    @PreAuthorize("@ss.hasPermi('system:comment:add')")
     @Log(title = "评论审核", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody NewsComment newsComment)
-    {
+    public AjaxResult add(@RequestBody NewsComment newsComment) {
+        newsComment.setUserId(SecurityUtils.getUserId());
         return toAjax(newsCommentService.insertNewsComment(newsComment));
     }
 

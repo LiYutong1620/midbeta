@@ -3,6 +3,7 @@ package com.example.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.example.service.impl.NewsServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
@@ -37,7 +38,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 public class NewsController extends BaseController
 {
     @Autowired
-    private INewsService newsService;
+    private NewsServiceImpl newsService;
 
     /**
      * 查询新闻资讯列表
@@ -66,7 +67,13 @@ public class NewsController extends BaseController
         List<News> list = newsService.selectNewsList(news);
         return getDataTable(list);
     }
-
+    /**
+     * 前台获取新闻详情（无需权限）
+     */
+    @GetMapping("/public/{id}")
+    public AjaxResult publicDetail(@PathVariable("id") Long id) {
+        return success(newsService.selectNewsByIdForView(id));
+    }
     /**
      * 导出新闻资讯列表
      */

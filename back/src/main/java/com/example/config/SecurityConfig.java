@@ -88,6 +88,7 @@ public class SecurityConfig {
                                 new AntPathRequestMatcher("/v3/api-docs/**"),
                                 new AntPathRequestMatcher("/swagger-resources/**")
                         ).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/system/news/public/**")).permitAll()
                         .requestMatchers(
                                 new AntPathRequestMatcher("/", HttpMethod.GET.name()),
                                 new AntPathRequestMatcher("/*.html", HttpMethod.GET.name()),
@@ -96,6 +97,8 @@ public class SecurityConfig {
                                 new AntPathRequestMatcher("/**/*.js", HttpMethod.GET.name()),
                                 new AntPathRequestMatcher("/profile/**", HttpMethod.GET.name())
                         ).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/common/upload")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/upload/**")).permitAll()
                         // 6.3 其余所有请求都需要认证
                         .anyRequest().authenticated()
                 )

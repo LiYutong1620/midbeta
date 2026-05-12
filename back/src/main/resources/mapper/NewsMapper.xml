@@ -20,12 +20,19 @@
         <result property="isDeleted"    column="is_deleted"    />
         <result property="createdAt"    column="created_at"    />
         <result property="updatedAt"    column="updated_at"    />
+        <result property="readCount" column="read_count" />
+        <result property="likeCount" column="like_count" />
     </resultMap>
 
     <sql id="selectNewsVo">
-        select n.id, n.title, n.summary, n.category_id, n.cover_url, n.content, n.publish_status, n.shelf_status, n.publish_user_id, n.publish_time, n.version, n.is_deleted, n.created_at, n.updated_at, c.category_name as category_name
+        select n.id, n.title, n.summary, n.category_id, n.cover_url, n.content,
+               n.publish_status, n.shelf_status, n.publish_user_id, n.publish_time,
+               n.version, n.is_deleted, n.created_at, n.updated_at,
+               c.category_name as category_name,
+               s.read_count as read_count, s.like_count as like_count
         from t_news n
                  left join t_news_category c on n.category_id = c.id
+                 left join t_news_statistics s on n.id = s.news_id
     </sql>
 
     <select id="selectNewsList" parameterType="com.example.domain.News" resultMap="NewsResult">
@@ -95,6 +102,10 @@
             <if test="updatedAt != null">updated_at = #{updatedAt},</if>
         </trim>
         where id = #{id}
+    </update>
+
+    <update id="incrementReadCount">
+        update t_news_statistics set read_count = read_count + 1 where news_id = #{newsId}
     </update>
 
     <delete id="deleteNewsById" parameterType="Long">

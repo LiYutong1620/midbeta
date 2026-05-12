@@ -58,4 +58,7 @@ public interface NewsLikeMapper
      * @return 结果
      */
     public int deleteNewsLikeByIds(Long[] ids);
+
+    void incrementLikeCount(Long newsId);
+    void decrementLikeCount(Long newsId);
 }

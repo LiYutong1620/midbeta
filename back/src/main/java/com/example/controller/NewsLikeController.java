@@ -1,6 +1,8 @@
 package com.example.controller;
 
 import java.util.List;
+
+import com.ruoyi.common.utils.SecurityUtils;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,11 +74,10 @@ public class NewsLikeController extends BaseController
     /**
      * 新增点赞记录
      */
-    @PreAuthorize("@ss.hasPermi('system:like:add')")
     @Log(title = "点赞记录", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody NewsLike newsLike)
-    {
+    public AjaxResult add(@RequestBody NewsLike newsLike) {
+        newsLike.setUserId(SecurityUtils.getUserId());
         return toAjax(newsLikeService.insertNewsLike(newsLike));
     }
 

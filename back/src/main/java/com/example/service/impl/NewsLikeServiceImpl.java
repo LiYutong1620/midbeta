@@ -1,5 +1,6 @@
 package com.example.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import com.ruoyi.common.core.redis.RedisCache;
@@ -54,15 +55,40 @@ public class NewsLikeServiceImpl implements INewsLikeService
      * @return 结果
      */
     @Override
-    public int insertNewsLike(NewsLike newsLike)
-    {
-        int rows = newsLikeMapper.insertNewsLike(newsLike);
-        if (rows > 0) {
-            // Redis 计数器累加 (Redis 缓存应用 b)
-            String key = "news:like_count:" + newsLike.getNewsId();
-            redisCache.redisTemplate.opsForValue().increment(key);
+    public int insertNewsLike(NewsLike newsLike) {
+        NewsLike exist = new NewsLike();
+        exist.setUserId(newsLike.getUserId());
+        exist.setNewsId(newsLike.getNewsId());
+        List<NewsLike> existing = newsLikeMapper.selectNewsLikeList(exist);
+
+        if (existing != null && !existing.isEmpty()) {
+            NewsLike record = existing.get(0);
+            int oldStatus = record.getLikeStatus() != null ? record.getLikeStatus() : 0;
+            record.setLikeStatus(newsLike.getLikeStatus());
+            record.setUpdatedAt(new Date());
+            int rows = newsLikeMapper.updateNewsLike(record);
+            if (rows > 0) {
+                // 根据状态变化更新统计表
+                if (newsLike.getLikeStatus() != null && newsLike.getLikeStatus() == 1 && oldStatus == 0) {
+                    newsLikeMapper.incrementLikeCount(newsLike.getNewsId());
+                    redisCache.redisTemplate.opsForValue().increment("news:like_count:" + newsLike.getNewsId());
+                } else if (newsLike.getLikeStatus() != null && newsLike.getLikeStatus() == 0 && oldStatus == 1) {
+                    newsLikeMapper.decrementLikeCount(newsLike.getNewsId());
+                    redisCache.redisTemplate.opsForValue().decrement("news:like_count:" + newsLike.getNewsId());
+                }
+            }
+            return rows;
+        } else {
+            int rows = newsLikeMapper.insertNewsLike(newsLike);
+            if (rows > 0) {
+                newsLikeMapper.incrementLikeCount(newsLike.getNewsId());
+                redisCache.redisTemplate.opsForValue().increment("news:like_count:" + newsLike.getNewsId());
+                redisCache.deleteObject("news:detail:" + newsLike.getNewsId());
+                redisCache.deleteObject("news:home_list");
+
+            }
+            return rows;
         }
-        return rows;
     }
     /**
      * 修改点赞记录

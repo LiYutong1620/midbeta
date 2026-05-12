@@ -17,6 +17,24 @@
         <el-input v-model="form.title" placeholder="请输入新闻标题" class="geometric-input" />
       </el-form-item>
 
+      <!-- 封面图上传区域 -->
+      <el-form-item label="封面图片 COVER">
+        <el-upload
+          class="cover-uploader"
+          :action="uploadUrl"
+          :headers="uploadHeaders"
+          :show-file-list="false"
+          :on-success="handleCoverSuccess"
+          :before-upload="beforeCoverUpload"
+        >
+          <img v-if="form.coverUrl" :src="getFullUrl(form.coverUrl)" class="cover-image" />
+          <div v-else class="upload-box">
+            <Plus class="w-8 h-8 text-slate-400" />
+            <span class="text-xs text-slate-400 mt-1">上传封面</span>
+          </div>
+        </el-upload>
+      </el-form-item>
+
       <div class="grid grid-cols-2 gap-4">
         <el-form-item label="所属分类 CATEGORY" prop="categoryId">
           <el-select v-model="form.categoryId" placeholder="请选择分类" class="w-full geometric-select">
@@ -95,7 +113,9 @@ import { ref, reactive, computed } from 'vue';
 import { QuillEditor } from '@vueup/vue-quill';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import { ElMessage, type FormInstance } from 'element-plus';
+import { Plus } from 'lucide-vue-next';
 import request, { AjaxResult } from '@/utils/request';
+import { getFullUrl } from '@/utils/image';
 
 const emit = defineEmits(['success']);
 
@@ -111,6 +131,7 @@ const form = reactive<any>({
   summary: '',
   categoryId: undefined,
   content: '',
+  coverUrl: '',          // 新增封面字段
   publishStatus: 1,
   tagIds: [],
 });
@@ -138,6 +159,31 @@ const editorOptions = {
   }
 };
 
+// 上传相关
+const uploadUrl = computed(() => import.meta.env.VITE_APP_BASE_API + '/common/upload');
+
+const uploadHeaders = computed(() => {
+  const token = localStorage.getItem('token');
+  return token ? { Authorization: `Bearer ${token}` } : {};
+});
+
+const handleCoverSuccess = (response: any) => {
+  // AjaxResult.success 返回的 data 是 url 字符串
+  form.coverUrl = response.data || response.url || '';
+};
+
+const beforeCoverUpload = (file: File) => {
+  const isImage = file.type.startsWith('image/');
+  const isLt2M = file.size / 1024 / 1024 < 2;
+  if (!isImage) {
+    ElMessage.error('只能上传 JPG/PNG 格式的图片!');
+  }
+  if (!isLt2M) {
+    ElMessage.error('图片大小不能超过 2MB!');
+  }
+  return isImage && isLt2M;
+};
+
 const open = (id?: number) => {
   reset();
   getCategoryList();
@@ -154,6 +200,7 @@ const reset = () => {
   form.summary = '';
   form.categoryId = undefined;
   form.content = '';
+  form.coverUrl = '';    // 重置封面
   form.publishStatus = 1;
   form.tagIds = [];
   formRef.value?.resetFields();
@@ -195,6 +242,7 @@ const getDetail = async (id: number) => {
     form.summary = data.summary;
     form.categoryId = data.categoryId;
     form.content = data.content;
+    form.coverUrl = data.coverUrl || '';    // 回显封面
     form.publishStatus = data.publishStatus;
     form.tagIds = [];
     const tagRes: any = await request.get('/system/tagRel/list', { params: { newsId: id } });
@@ -283,5 +331,29 @@ defineExpose({ open });
   border: 1px solid #e2e8f0 !important;
   box-shadow: none !important;
   border-radius: 10px !important;
+}
+
+/* 封面上传样式 */
+.cover-uploader .cover-image {
+  width: 178px;
+  height: 178px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.upload-box {
+  width: 178px;
+  height: 178px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.upload-box:hover {
+  border-color: #4f46e5;
 }
 </style>
