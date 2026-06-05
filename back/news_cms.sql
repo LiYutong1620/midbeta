@@ -11,7 +11,7 @@
  Target Server Version : 80044 (8.0.44)
  File Encoding         : 65001
 
- Date: 11/05/2026 00:44:46
+ Date: 17/05/2026 20:45:23
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,6 @@ CREATE TABLE `redis_sync_temp`  (
 -- ----------------------------
 -- Records of redis_sync_temp
 -- ----------------------------
-INSERT INTO `redis_sync_temp` VALUES (1, 'view', '1300');
 
 -- ----------------------------
 -- Table structure for t_news
@@ -56,14 +55,14 @@ CREATE TABLE `t_news`  (
   INDEX `fk_t_news_publish_user_id`(`publish_user_id` ASC) USING BTREE,
   CONSTRAINT `fk_t_news_category_id` FOREIGN KEY (`category_id`) REFERENCES `t_news_category` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_t_news_publish_user_id` FOREIGN KEY (`publish_user_id`) REFERENCES `t_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '新闻主表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '新闻主表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_news
 -- ----------------------------
-INSERT INTO `t_news` VALUES (1, '人工智能新突破', 'AI 在医疗领域取得重大进展', 1, '/img/ai.jpg', '详细内容...', 1, 1, 1, '2026-04-22 23:02:42', 1, 0, '2026-04-22 23:02:42', '2026-04-22 23:02:42');
-INSERT INTO `t_news` VALUES (2, '区块链技术落地应用', '供应链金融案例', 3, '/img/blockchain.jpg', '详细内容...', 1, 1, 1, '2026-04-22 23:02:42', 1, 0, '2026-04-22 23:02:42', '2026-04-22 23:02:42');
-INSERT INTO `t_news` VALUES (3, '云计算市场增长', '2026年份额预测', 1, '/img/cloud.jpg', '详细内容...', 1, 1, 1, '2026-04-22 23:02:42', 1, 0, '2026-04-22 23:02:42', '2026-04-22 23:02:42');
+INSERT INTO `t_news` VALUES (1, '人工智能新突破', 'AI 在医疗领域取得重大进展', 1, '/upload/cc89bd4d-f8b8-4639-a602-e26a4f252340.webp', '<p>详细内容...</p>', 1, 1, 1, '2026-04-22 23:02:42', 1, 0, '2026-04-22 23:02:42', '2026-05-12 16:39:14');
+INSERT INTO `t_news` VALUES (2, '区块链技术落地应用', '供应链金融案例', 3, '/upload/59359136-50f3-4e6c-82e1-bc639ed00e3c.png', '详细内容...', 1, 1, 1, '2026-04-22 23:02:42', 1, 0, '2026-04-22 23:02:42', '2026-05-12 16:39:29');
+INSERT INTO `t_news` VALUES (3, '云计算市场增长', '2026年份额预测', 1, '/upload/1440f4d5-070c-490c-88a5-5ca1076f2618.png', '详细内容...', 1, 1, 1, '2026-04-22 23:02:42', 1, 0, '2026-04-22 23:02:42', '2026-05-12 16:39:42');
 INSERT INTO `t_news` VALUES (4, '大数据驱动营销', '精准投放案例', 1, '/img/bigdata.jpg', '详细内容...', 1, 1, 1, '2026-04-22 23:02:42', 1, 0, '2026-04-22 23:02:42', '2026-04-22 23:02:42');
 INSERT INTO `t_news` VALUES (5, '5G+智能手机体验', '新一代通信终端', 2, '/img/5g.jpg', '详细内容...', 1, 1, 1, '2026-04-22 23:02:42', 1, 0, '2026-04-22 23:02:42', '2026-04-22 23:02:42');
 INSERT INTO `t_news` VALUES (6, 'A股市场持续走强', '科技股领涨', 3, '/img/stock.jpg', '详细内容...', 1, 1, 1, '2026-04-22 23:02:42', 1, 0, '2026-04-22 23:02:42', '2026-04-22 23:02:42');
@@ -77,6 +76,8 @@ INSERT INTO `t_news` VALUES (13, 'AI+智能手机未来', '端侧大模型落地
 INSERT INTO `t_news` VALUES (14, '装修避坑指南', '水电隐蔽工程', 10, '/img/decor.jpg', '详细内容...', 1, 1, 1, '2026-04-22 23:02:42', 1, 0, '2026-04-22 23:02:42', '2026-04-22 23:02:42');
 INSERT INTO `t_news` VALUES (15, 'RPG游戏推荐', '年度必玩清单', 12, '/img/rpg.jpg', '详细内容...', 1, 1, 1, '2026-04-22 23:02:42', 1, 0, '2026-04-22 23:02:42', '2026-04-22 23:02:42');
 INSERT INTO `t_news` VALUES (16, '养生误区辟谣', '常见健康谣言', 11, '/img/health.jpg', '详细内容...', 0, 1, 1, NULL, 1, 0, '2026-04-22 23:02:42', NULL);
+INSERT INTO `t_news` VALUES (22, 'NIKKI', 'NIKKI', 12, '/upload/ede9ccda-ccb1-4ff5-b503-df811f56d47b.jpg', '<p>NIKKINIKKI</p>', 1, 1, 1, NULL, 1, 0, '2026-05-11 19:54:14', NULL);
+INSERT INTO `t_news` VALUES (23, 'zAA', '', 1, '', '<p>IT之家 5 月 13 日消息，中国载人航天工程办公室昨晚正式发布神舟二十三号载人飞行任务的最新版标识，<strong>相较于此前的版本在细节上进行了微调</strong>。</p><p><span style=\"background-color: rgb(242, 242, 242);\"><img src=\"https://img-s.msn.cn/tenant/amp/entityid/AA232Iu1.img?w=612&amp;h=612&amp;m=6\" alt=\"图片\"></span></p>', 1, 1, 1, NULL, 1, 0, '2026-05-13 19:32:29', '2026-05-13 19:32:41');
 
 -- ----------------------------
 -- Table structure for t_news_category
@@ -94,12 +95,12 @@ CREATE TABLE `t_news_category`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_t_news_category_name`(`category_name` ASC) USING BTREE,
   INDEX `idx_t_news_category_parent_status`(`parent_id` ASC, `status` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '新闻分类表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '新闻分类表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_news_category
 -- ----------------------------
-INSERT INTO `t_news_category` VALUES (1, '科技', 0, 1, 1, 0, '2026-04-22 23:02:41', NULL);
+INSERT INTO `t_news_category` VALUES (1, '科技', 0, 1, 1, 0, '2026-04-22 23:02:41', '2026-05-11 17:45:53');
 INSERT INTO `t_news_category` VALUES (2, '数码', 0, 2, 1, 0, '2026-04-22 23:02:41', NULL);
 INSERT INTO `t_news_category` VALUES (3, '财经', 0, 3, 1, 0, '2026-04-22 23:02:41', NULL);
 INSERT INTO `t_news_category` VALUES (4, '体育', 0, 4, 1, 0, '2026-04-22 23:02:41', NULL);
@@ -111,6 +112,8 @@ INSERT INTO `t_news_category` VALUES (9, '汽车', 0, 9, 1, 0, '2026-04-22 23:02
 INSERT INTO `t_news_category` VALUES (10, '房产', 0, 10, 1, 0, '2026-04-22 23:02:41', NULL);
 INSERT INTO `t_news_category` VALUES (11, '健康', 0, 11, 1, 0, '2026-04-22 23:02:41', NULL);
 INSERT INTO `t_news_category` VALUES (12, '游戏', 0, 12, 1, 0, '2026-04-22 23:02:41', NULL);
+INSERT INTO `t_news_category` VALUES (14, '人文', 0, 13, 0, 0, '2026-05-11 16:25:24', NULL);
+INSERT INTO `t_news_category` VALUES (15, '自然', 0, 14, 1, 0, '2026-05-11 16:26:09', NULL);
 
 -- ----------------------------
 -- Table structure for t_news_comment
@@ -129,7 +132,7 @@ CREATE TABLE `t_news_comment`  (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_comment_news_audit`(`news_id` ASC, `audit_status` ASC, `is_hidden` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '新闻评论表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '新闻评论表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_news_comment
@@ -138,7 +141,8 @@ INSERT INTO `t_news_comment` VALUES (1, 1, 2, '写得不错，很有深度！', 
 INSERT INTO `t_news_comment` VALUES (2, 1, 3, '期待更多类似内容', 0, 0, NULL, NULL, 0, '2026-04-22 23:11:00');
 INSERT INTO `t_news_comment` VALUES (3, 2, 4, '区块链确实在落地', 1, 0, NULL, NULL, 0, '2026-04-22 23:12:00');
 INSERT INTO `t_news_comment` VALUES (4, 5, 2, '5G速度很快', 2, 0, 1, '2026-04-22 23:30:00', 0, '2026-04-22 23:13:00');
-INSERT INTO `t_news_comment` VALUES (5, 8, 5, '电影好看', 0, 1, NULL, NULL, 0, '2026-04-22 23:14:00');
+INSERT INTO `t_news_comment` VALUES (5, 8, 5, '电影好看', 2, 1, 1, '2026-05-13 19:33:20', 0, '2026-04-22 23:14:00');
+INSERT INTO `t_news_comment` VALUES (9, 1, 2, '11111', 1, 1, 1, '2026-05-13 19:33:18', 0, '2026-05-12 16:11:37');
 
 -- ----------------------------
 -- Table structure for t_news_like
@@ -157,12 +161,12 @@ CREATE TABLE `t_news_like`  (
   INDEX `fk_t_news_like_news_id`(`news_id` ASC) USING BTREE,
   CONSTRAINT `fk_t_news_like_news_id` FOREIGN KEY (`news_id`) REFERENCES `t_news` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `fk_t_news_like_user_id` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '新闻点赞表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '新闻点赞表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_news_like
 -- ----------------------------
-INSERT INTO `t_news_like` VALUES (1, 2, 1, 1, 0, '2026-04-22 11:02:42', '2026-04-22 11:02:42');
+INSERT INTO `t_news_like` VALUES (1, 2, 1, 1, 0, '2026-04-22 11:02:42', '2026-05-12 17:50:26');
 INSERT INTO `t_news_like` VALUES (2, 2, 5, 1, 0, '2026-04-22 13:02:42', '2026-04-22 13:02:42');
 INSERT INTO `t_news_like` VALUES (3, 2, 7, 1, 0, '2026-04-22 15:02:42', '2026-04-22 15:02:42');
 INSERT INTO `t_news_like` VALUES (4, 2, 8, 1, 0, '2026-04-22 17:02:42', '2026-04-22 17:02:42');
@@ -176,6 +180,7 @@ INSERT INTO `t_news_like` VALUES (11, 4, 8, 1, 0, '2026-04-22 20:02:42', '2026-0
 INSERT INTO `t_news_like` VALUES (12, 5, 2, 1, 0, '2026-04-22 14:02:42', '2026-04-22 14:02:42');
 INSERT INTO `t_news_like` VALUES (13, 5, 6, 1, 0, '2026-04-22 16:02:42', '2026-04-22 16:02:42');
 INSERT INTO `t_news_like` VALUES (14, 5, 7, 1, 0, '2026-04-22 19:02:42', '2026-04-22 19:02:42');
+INSERT INTO `t_news_like` VALUES (19, 1, 1, 1, 0, '2026-05-12 17:51:11', '2026-05-13 19:34:51');
 
 -- ----------------------------
 -- Table structure for t_news_statistics
@@ -200,9 +205,9 @@ CREATE TABLE `t_news_statistics`  (
 -- ----------------------------
 -- Records of t_news_statistics
 -- ----------------------------
-INSERT INTO `t_news_statistics` VALUES (1, 1, 1259, 3, 1, 80, '2026-04-30 22:21:26', 0, '2026-04-22 23:02:42', '2026-05-10 20:16:00');
-INSERT INTO `t_news_statistics` VALUES (2, 2, 987, 2, 1, 80, '2026-04-30 22:21:26', 0, '2026-04-22 23:02:42', '2026-05-10 20:16:00');
-INSERT INTO `t_news_statistics` VALUES (3, 3, 756, 1, 1, 80, '2026-04-30 22:21:26', 0, '2026-04-22 23:02:42', '2026-05-10 20:16:00');
+INSERT INTO `t_news_statistics` VALUES (1, 1, 1338, 4, 1, 80, '2026-04-30 22:21:26', 0, '2026-04-22 23:02:42', '2026-05-13 19:34:57');
+INSERT INTO `t_news_statistics` VALUES (2, 2, 1005, 2, 1, 80, '2026-04-30 22:21:26', 0, '2026-04-22 23:02:42', '2026-05-12 18:06:18');
+INSERT INTO `t_news_statistics` VALUES (3, 3, 774, 1, 1, 80, '2026-04-30 22:21:26', 0, '2026-04-22 23:02:42', '2026-05-12 18:06:18');
 INSERT INTO `t_news_statistics` VALUES (4, 4, 1023, 1, 0, 80, '2026-04-30 22:21:26', 0, '2026-04-22 23:02:42', '2026-05-10 20:16:00');
 INSERT INTO `t_news_statistics` VALUES (5, 5, 1568, 2, 0, 80, '2026-04-30 22:21:26', 0, '2026-04-22 23:02:42', '2026-05-10 20:16:00');
 INSERT INTO `t_news_statistics` VALUES (6, 6, 654, 1, 0, 80, '2026-04-30 22:21:26', 0, '2026-04-22 23:02:42', '2026-05-10 20:16:00');
@@ -228,7 +233,7 @@ CREATE TABLE `t_news_tag`  (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_t_news_tag_name`(`tag_name` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '新闻标签表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '新闻标签表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_news_tag
@@ -321,7 +326,7 @@ CREATE TABLE `t_role`  (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_t_role_role_code`(`role_code` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '角色表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '角色表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_role
@@ -349,7 +354,7 @@ CREATE TABLE `t_sys_config`  (
 -- ----------------------------
 -- Records of t_sys_config
 -- ----------------------------
-INSERT INTO `t_sys_config` VALUES (1, 'site_name', '新闻资讯发布与推荐系统', 'system', '网站名称', 0, '2026-04-22 23:02:42', '2026-04-22 23:02:42');
+INSERT INTO `t_sys_config` VALUES (1, 'site_name', '新闻资讯发布与推荐系统', 'system', '网站名称', 0, '2026-04-22 23:02:42', '2026-05-11 18:17:45');
 INSERT INTO `t_sys_config` VALUES (2, 'site_logo', '/static/logo.png', 'system', '网站Logo', 0, '2026-04-22 23:02:42', '2026-04-22 23:02:42');
 INSERT INTO `t_sys_config` VALUES (3, 'site_url', 'http://localhost:8080', 'system', '网站地址', 0, '2026-04-22 23:02:42', '2026-04-22 23:02:42');
 INSERT INTO `t_sys_config` VALUES (4, 'contact_email', 'admin@example.com', 'contact', '联系邮箱', 0, '2026-04-22 23:02:42', '2026-04-22 23:02:42');
@@ -404,17 +409,17 @@ CREATE TABLE `t_user`  (
   UNIQUE INDEX `uk_t_user_username`(`username` ASC) USING BTREE,
   INDEX `idx_t_user_role_status`(`role_id` ASC, `status` ASC) USING BTREE,
   CONSTRAINT `fk_t_user_role_id` FOREIGN KEY (`role_id`) REFERENCES `t_role` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
 INSERT INTO `t_user` VALUES (1, 'admin', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVKIUi', '超级管理员', 1, 1, 0, '2026-04-22 23:02:41', '2026-05-10 20:14:24', '2026-04-29 20:43:35', '0:0:0:0:0:0:0:1');
-INSERT INTO `t_user` VALUES (2, 'user1', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVKIUi', '测试用户1', 2, 1, 0, '2026-04-22 23:02:41', '2026-05-10 20:21:28', '2026-04-29 21:08:00', '0:0:0:0:0:0:0:1');
+INSERT INTO `t_user` VALUES (2, 'user1', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVKIUi', '测试用户1', 2, 1, 0, '2026-04-22 23:02:41', '2026-05-11 18:03:23', '2026-04-29 21:08:00', '0:0:0:0:0:0:0:1');
 INSERT INTO `t_user` VALUES (3, 'user2', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVKIUi', '测试用户2', 2, 0, 0, '2026-04-22 23:02:41', '2026-05-10 20:21:57', '2026-04-22 23:02:41', '127.0.0.1');
 INSERT INTO `t_user` VALUES (4, 'user3', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVKIUi', '测试用户3', 2, 1, 1, '2026-04-22 23:02:41', '2026-05-10 20:22:38', '2026-04-22 23:02:41', '127.0.0.1');
 INSERT INTO `t_user` VALUES (5, 'user4', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVKIUi', '测试用户4', 2, 0, 1, '2026-04-22 23:02:41', '2026-05-10 20:22:45', '2026-04-22 23:02:41', '127.0.0.1');
-INSERT INTO `t_user` VALUES (8, 'user5', '$2a$10$J54LDOc5NT7g4GBvtDUqXORFKEal98Tv4poKQ4a2dBUIlKZ2H6maC', '测试账号停用', 2, 1, 0, '2026-05-10 21:12:13', NULL, NULL, '');
+INSERT INTO `t_user` VALUES (9, 'user5', '$2a$10$LzsCQj4PpiZRgMQTeLGtQ.h0.s3YiMCbycZ8jAWxyYOhw8wIBKkxS', NULL, 2, 1, 0, '2026-05-11 11:23:15', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for t_user_browse
@@ -432,7 +437,7 @@ CREATE TABLE `t_user_browse`  (
   INDEX `fk_t_user_browse_news_id`(`news_id` ASC) USING BTREE,
   CONSTRAINT `fk_t_user_browse_news_id` FOREIGN KEY (`news_id`) REFERENCES `t_news` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `fk_t_user_browse_user_id` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户浏览记录表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 78 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户浏览记录表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_user_browse
@@ -450,6 +455,70 @@ INSERT INTO `t_user_browse` VALUES (10, 4, 5, '2026-04-22 20:43:35', 95, 0);
 INSERT INTO `t_user_browse` VALUES (11, 5, 2, '2026-04-22 22:13:35', 130, 0);
 INSERT INTO `t_user_browse` VALUES (12, 5, 6, '2026-04-22 21:13:35', 85, 0);
 INSERT INTO `t_user_browse` VALUES (13, 5, 7, '2026-04-22 19:13:35', 160, 0);
+INSERT INTO `t_user_browse` VALUES (14, 1, 1, '2026-05-11 20:42:34', 0, 0);
+INSERT INTO `t_user_browse` VALUES (15, 1, 1, '2026-05-11 20:43:46', 0, 0);
+INSERT INTO `t_user_browse` VALUES (16, 1, 1, '2026-05-11 20:59:00', 0, 0);
+INSERT INTO `t_user_browse` VALUES (17, 1, 1, '2026-05-12 15:16:16', 0, 0);
+INSERT INTO `t_user_browse` VALUES (18, 1, 1, '2026-05-12 15:17:16', 0, 0);
+INSERT INTO `t_user_browse` VALUES (19, 1, 1, '2026-05-12 15:17:36', 0, 0);
+INSERT INTO `t_user_browse` VALUES (20, 1, 1, '2026-05-12 15:19:27', 0, 0);
+INSERT INTO `t_user_browse` VALUES (21, 1, 1, '2026-05-12 15:19:38', 0, 0);
+INSERT INTO `t_user_browse` VALUES (22, 1, 1, '2026-05-12 15:48:42', 0, 0);
+INSERT INTO `t_user_browse` VALUES (23, 1, 1, '2026-05-12 15:48:55', 0, 0);
+INSERT INTO `t_user_browse` VALUES (24, 1, 1, '2026-05-12 15:49:00', 0, 0);
+INSERT INTO `t_user_browse` VALUES (25, 1, 1, '2026-05-12 15:49:05', 0, 0);
+INSERT INTO `t_user_browse` VALUES (26, 2, 1, '2026-05-12 16:04:16', 0, 0);
+INSERT INTO `t_user_browse` VALUES (27, 2, 1, '2026-05-12 16:11:28', 0, 0);
+INSERT INTO `t_user_browse` VALUES (28, 2, 1, '2026-05-12 16:11:50', 0, 0);
+INSERT INTO `t_user_browse` VALUES (29, 2, 1, '2026-05-12 16:13:02', 0, 0);
+INSERT INTO `t_user_browse` VALUES (30, 2, 1, '2026-05-12 16:13:18', 0, 0);
+INSERT INTO `t_user_browse` VALUES (31, 1, 1, '2026-05-12 16:14:53', 0, 0);
+INSERT INTO `t_user_browse` VALUES (32, 1, 1, '2026-05-12 16:15:00', 0, 0);
+INSERT INTO `t_user_browse` VALUES (33, 1, 1, '2026-05-12 16:15:59', 0, 0);
+INSERT INTO `t_user_browse` VALUES (34, 1, 1, '2026-05-12 16:31:14', 0, 0);
+INSERT INTO `t_user_browse` VALUES (35, 1, 2, '2026-05-12 16:33:40', 0, 0);
+INSERT INTO `t_user_browse` VALUES (36, 1, 3, '2026-05-12 16:34:53', 0, 0);
+INSERT INTO `t_user_browse` VALUES (37, 1, 1, '2026-05-12 16:44:58', 0, 0);
+INSERT INTO `t_user_browse` VALUES (38, 1, 1, '2026-05-12 16:57:15', 0, 0);
+INSERT INTO `t_user_browse` VALUES (39, 1, 1, '2026-05-12 16:58:42', 0, 0);
+INSERT INTO `t_user_browse` VALUES (40, 1, 1, '2026-05-12 16:58:47', 0, 0);
+INSERT INTO `t_user_browse` VALUES (41, 1, 1, '2026-05-12 17:00:13', 0, 0);
+INSERT INTO `t_user_browse` VALUES (42, 2, 1, '2026-05-12 17:01:06', 0, 0);
+INSERT INTO `t_user_browse` VALUES (43, 2, 1, '2026-05-12 17:06:00', 0, 0);
+INSERT INTO `t_user_browse` VALUES (44, 2, 1, '2026-05-12 17:18:15', 0, 0);
+INSERT INTO `t_user_browse` VALUES (45, 2, 1, '2026-05-12 17:41:30', 0, 0);
+INSERT INTO `t_user_browse` VALUES (46, 2, 1, '2026-05-12 17:41:48', 0, 0);
+INSERT INTO `t_user_browse` VALUES (47, 2, 1, '2026-05-12 17:50:31', 0, 0);
+INSERT INTO `t_user_browse` VALUES (48, 2, 1, '2026-05-12 17:50:42', 0, 0);
+INSERT INTO `t_user_browse` VALUES (49, 1, 1, '2026-05-12 17:51:10', 0, 0);
+INSERT INTO `t_user_browse` VALUES (50, 1, 1, '2026-05-12 17:51:19', 0, 0);
+INSERT INTO `t_user_browse` VALUES (51, 1, 1, '2026-05-12 17:52:19', 0, 0);
+INSERT INTO `t_user_browse` VALUES (52, 1, 1, '2026-05-12 18:05:55', 0, 0);
+INSERT INTO `t_user_browse` VALUES (53, 1, 1, '2026-05-12 18:05:59', 0, 0);
+INSERT INTO `t_user_browse` VALUES (54, 1, 1, '2026-05-12 18:06:03', 0, 0);
+INSERT INTO `t_user_browse` VALUES (55, 1, 1, '2026-05-12 18:06:10', 0, 0);
+INSERT INTO `t_user_browse` VALUES (56, 1, 1, '2026-05-12 18:06:12', 0, 0);
+INSERT INTO `t_user_browse` VALUES (57, 1, 1, '2026-05-12 18:06:19', 0, 0);
+INSERT INTO `t_user_browse` VALUES (58, 2, 1, '2026-05-12 18:11:12', 0, 0);
+INSERT INTO `t_user_browse` VALUES (59, 2, 1, '2026-05-12 18:14:33', 0, 0);
+INSERT INTO `t_user_browse` VALUES (60, 2, 1, '2026-05-12 18:14:43', 0, 0);
+INSERT INTO `t_user_browse` VALUES (61, 2, 1, '2026-05-12 18:16:14', 0, 0);
+INSERT INTO `t_user_browse` VALUES (62, 2, 1, '2026-05-12 18:18:54', 0, 0);
+INSERT INTO `t_user_browse` VALUES (63, 2, 1, '2026-05-12 18:30:36', 0, 0);
+INSERT INTO `t_user_browse` VALUES (64, 2, 1, '2026-05-12 18:30:38', 0, 0);
+INSERT INTO `t_user_browse` VALUES (65, 2, 1, '2026-05-12 18:30:42', 0, 0);
+INSERT INTO `t_user_browse` VALUES (66, 2, 1, '2026-05-12 18:30:44', 0, 0);
+INSERT INTO `t_user_browse` VALUES (67, 2, 1, '2026-05-12 18:30:48', 0, 0);
+INSERT INTO `t_user_browse` VALUES (68, 2, 1, '2026-05-12 18:30:50', 0, 0);
+INSERT INTO `t_user_browse` VALUES (69, 2, 1, '2026-05-12 18:30:51', 0, 0);
+INSERT INTO `t_user_browse` VALUES (70, 2, 1, '2026-05-12 18:30:53', 0, 0);
+INSERT INTO `t_user_browse` VALUES (71, 2, 1, '2026-05-12 18:30:54', 0, 0);
+INSERT INTO `t_user_browse` VALUES (72, 2, 1, '2026-05-12 18:30:55', 0, 0);
+INSERT INTO `t_user_browse` VALUES (73, 2, 1, '2026-05-13 00:10:48', 0, 0);
+INSERT INTO `t_user_browse` VALUES (74, 1, 1, '2026-05-13 19:33:35', 0, 0);
+INSERT INTO `t_user_browse` VALUES (75, 1, 1, '2026-05-13 19:33:53', 0, 0);
+INSERT INTO `t_user_browse` VALUES (76, 1, 1, '2026-05-13 19:34:21', 0, 0);
+INSERT INTO `t_user_browse` VALUES (77, 1, 1, '2026-05-13 19:34:58', 0, 0);
 
 -- ----------------------------
 -- View structure for v_news_available
